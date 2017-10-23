@@ -9,11 +9,11 @@ include "conexao.php";
 class DAOUsuario {
 
     private $listaUsuarios;
-    private $loginUsuario;
     private $nomeUsuario;
+    private $loginUsuario;
     private $emailUsuario;
     private $senhaUsuario;
-    
+
     function __construct() {
         
     }

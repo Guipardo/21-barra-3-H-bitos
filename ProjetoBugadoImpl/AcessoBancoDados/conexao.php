@@ -1,25 +1,13 @@
 <?php
 
-/*
- * Este arquivo realiza a conexão com o banco de dados
- */
-
-//Coloque o nome do servidor disponível
+//Dados do Servidor e Do Banco de Dados
 $nomeservidor = "localhost";
-$usuarioservidor = "username";
-$senhaservidor = "password";
-$bancodedados = "nomebanco";
+$usuarioservidor = "root";
+$senhaservidor = "";
+$bancodedados = "";
 
-// Criando conexão
-$conexao = new mysqli($nomeservidor, $usuarioservidor, $senhaservidor,$bancodedados);
+$conexao = new mysqli($nomeservidor, $usuarioservidor, $senhaservidor, $bancodedados);
 
-// Checando conexão
-if ($conexao->connect_error) {
-    die("Conexão falhou " . $conexao->connect_error);
+if ($conexao->mysqli_connect_errno()) {
+    echo "Não foi possível conectar: " . mysqli_connect_error();
 }
-echo "Conectado com sucesso";
-
-
-
-
-
