@@ -10,7 +10,15 @@
     <body id="bodyEntrar">  
         <section>
             <fieldset><h3>Criar Hábito</h3>
-                <!-- TO DO -->
+                <form action="criarHabito.php" method="POST">
+                    Nome: <input type="text" name="nome">
+                    Categoria: <input type="text" name="categoria">
+                    <p> Dificuldade </p>
+                    Fácil:<input type="radio" name="dificuldade" value="Fácil">
+                    Médio:<input type="radio" name="dificuldade" value="Médio">
+                    Difícil:<input type="radio" name="dificuldade" value="Difícil">
+                    <input type="button" value="Criar">
+                </form>
         </section> 
     </body>
 </html>

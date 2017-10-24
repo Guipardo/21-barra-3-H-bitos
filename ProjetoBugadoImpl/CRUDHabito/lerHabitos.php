@@ -1,3 +1,12 @@
 <?php
 
-//TO DO
+
+
+//TO DO 
+
+include "DAOHabito.php";
+
+$dao = new DAOHabito();
+
+$dao->lerTodos();
+

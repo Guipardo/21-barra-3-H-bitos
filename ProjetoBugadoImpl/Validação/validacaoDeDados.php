@@ -4,9 +4,9 @@ include "DAOUsuario.php";
 
 function validarNome($nome) {
     if (empty($nome)) {
-        header("location: formCadastro.php");
+        return false;
     } else if (!preg_match("/^[a-zA-Z ]*$/", $nome)) {
-        header("location: formCadastro.php");
+        return false;
     } else {
         return true;
     }
@@ -14,9 +14,9 @@ function validarNome($nome) {
 
 function validarEmail($email) {
     if (empty($email)) {
-        header("location: formCadastro.php");
+        return false;
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("location: formCadastro.php");
+        return false;
     } else {
         return true;
     }
@@ -24,9 +24,9 @@ function validarEmail($email) {
 
 function validarSenha($senha1, $senha2) {
     if (empty($senha1)) {
-        header("location: formCadastro.php");
+        return false;
     } else if ($senha1 != $senha2) {
-        header("location: formCadastro.php");
+        return false;
     } else {
         return true;
     }
