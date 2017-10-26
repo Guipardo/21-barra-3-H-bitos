@@ -32,10 +32,33 @@ function validarSenha($senha1, $senha2) {
     }
 }
 
-function cadastrarUsuario($nome, $sobrenome, $login, $email, $senha, $senha2) {
+function validarCadastro($nome, $sobrenome, $login, $email, $senha, $senha2) {
     $nomeValido = validarNome($nome);
     $emailValido = validarEmail($email);
     $senhaValida = validarSenha($senha, $senha2);
+
+    /* Validação de CADASTRO - Sessão 
+
+    CODIGO ERRO
+    0 - Nome, Email e Senha incorretos
+    1 - Email e Senha Incorretos
+    2-  Senha Incorreta
+    3 - Dados corretos
+
+*/
+
+    $mensagem = 0;
+    if(!$nomeValido){
+        $mensagem = 1;
+    }
+
+    if(!$emailValido){
+        $mensagem = 2;
+    }
+
+    if(!senhaValida){
+        $mensagem = 3;
+    }
 
     if ($nomeValido && $emailValido && $senhaValida) {
         $dao = new DAOUsuario();
@@ -44,20 +67,27 @@ function cadastrarUsuario($nome, $sobrenome, $login, $email, $senha, $senha2) {
         $dao->setSenhaUsuario($senha);
         $dao->setLoginUsuario($login);
         $dao->criar();
-        header("location: formLogin.php");
-    } else {
-        header("location: formCadastro.php");
     }
+    return $mensagem;
 }
 
-//Validação de LOGIN - Sessão
+/* Validação de LOGIN - Sessão 
+
+CODIGO ERRO
+0 - Login e Senha incorretos
+1 - Senha Incorreta
+2 - Login e Senha Correto
+
+*/
 function validarLogin($login, $senha) {
     $dao = new DAOUsuario();
     $dao->lerPeloLogin();
 
-    if ($login == $dao->getLoginUsuario() && $senha == $dao->getSenhaUsuario()) {
-        header("location: Projeto_Gestão.html");
-    } else {
-        header("location: formLogin.php");
+    $mensagem = 0;
+    if ($login == $dao->getLoginUsuario()){
+        $mensagem = 1;
+    }if($senha == $dao->getSenhaUsuario()){
+        $mensagem = 2;
     }
+        return $mensagem;
 }

@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS `login` (
   `sobrenome` varchar(20) NOT NULL,
   `login` varchar(40) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `senha` varchar(15) NOT NULL
+  `senha` varchar(15) NOT NULL,
+  `logado` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
