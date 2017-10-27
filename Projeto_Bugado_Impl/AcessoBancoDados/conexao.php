@@ -1,10 +1,10 @@
 <?php
 
 //Dados do Servidor e Do Banco de Dados
-$nomeservidor = "localhost";
+$nomeservidor = "127.0.0.1";
 $usuarioservidor = "root";
 $senhaservidor = "";
-$bancodedados = "";
+$bancodedados = "habitosbd";
 
 $conexao = new mysqli($nomeservidor, $usuarioservidor, $senhaservidor, $bancodedados);
 

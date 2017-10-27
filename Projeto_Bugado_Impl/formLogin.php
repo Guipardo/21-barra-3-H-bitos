@@ -16,7 +16,7 @@
                     <!-- Validação de Login (link)
                         validarLogin
                     -->
-                    <form id="tabelaForm" name="login" action="validarLogin.php" method="POST">
+                    <form id="tabelaForm" name="login" action="./validacao/validarLogin.php" method="POST">
                         <table>
                             <tr>
                                 <td>Login:</td>

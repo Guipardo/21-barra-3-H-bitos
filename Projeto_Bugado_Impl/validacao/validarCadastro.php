@@ -24,6 +24,7 @@ switch ($codMensagem) {
 	case 0:
 		/* Nome,Email e Senha Incorretos 
 		Redirecionar para Formulário de Cadastro */
+		header('Location: /home.php');
 		break;
 	case 1:
 		/* Email e Senha incorretos

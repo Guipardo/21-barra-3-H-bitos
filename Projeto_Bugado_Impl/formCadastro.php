@@ -12,7 +12,7 @@
             <fieldset><h3>Cadastro</h3>
 
                 <!-- Validação de Cadastro -->
-                <form id="tabelaForm" name="cadastro" action='validarCadastro.php' method='POST' >
+                <form id="tabelaForm" name="cadastro" action='./validacao/validarCadastro.php' method='POST' >
                     Nome: <input type='text' name='nome'/><br/>
                     Sobrenome: <input type='text' name='sobrenome'/><br/>
                     Login: <input type='text' name='login'/><br/>
