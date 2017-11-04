@@ -9,17 +9,18 @@
 
     <body id="bodyCadastro">  
         <section>
-            <fieldset><h3>Cadastro</h3>
-
+            <fieldset>
+                <h3> Cadastro </h3>
                 <!-- Validação de Cadastro -->
-                <form id="tabelaForm" name="cadastro" action='./validacao/validarCadastro.php' method='POST' >
+                <form id="tabelaForm" name="cadastro" action='usuario/cadastrar.php' method='POST'>
                     Nome: <input type='text' name='nome'/><br/>
-                    Sobrenome: <input type='text' name='sobrenome'/><br/>
-                    Login: <input type='text' name='login'/><br/>
                     E-mail: <input type='text' name='email'/><br/>
-                    Senha: <input type='password' minlength="8" required name='senha'/><br/>
+                    <br>
+                    Login: <input type='text' name='login'/><br/>
+                    Senha: <input type='password' required name='senha'/><br/>
                     Confirmar senha: <input type='password' name='senha2' minlength="8" required/><br/>
-                    <input type='submit' value='Inserir'/>
+                    <input type='submit' value='Cadastrar'/>
+                    <a href='formLogin.php'> Voltar </a>
                 </form></fieldset>
         </section> 
     </body>

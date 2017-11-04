@@ -4,30 +4,56 @@
  *  Este arquivo faz o crud dos hábitos no banco de dados
  */
 
-include "conexao.php";
+include '../acesso/conexao.php';
 
 class DAOHabito {
 
-	public $listaHabitos; // Lista de Habitos 
-    public $codHabito; //Código do hábito
-    public $nomeHabito; //String - Nome do hábito
-    public $categoriaHabito; // String - Categoria do hábito
-    public $dificuldadeHabito; //String - Dificuldade do hábito
-    public $contCicloHabito; // Contador de ciclos da barra
+	private $listaHabitos; // Lista de Habitos 
+    private $codHabito; //Código do hábito
+    private $nomeHabito; //String - Nome do hábito
+    private $categoriaHabito; // String - Categoria do hábito
+    private $dificuldadeHabito; //String - Dificuldade do hábito
+    private $contCicloHabito; // Contador de ciclos da barra
+    private $codUsuario; //Login do Usuário que esta relacionado a este hábito
+    private $dias; //Array de Quadrados que marcam os dias do ciclo
+
 
     function __construct() {
-        
+        $this->limpar();
     }
 
-    function preparaHabito($codHabito, $nome, $categoria, $dificuldade, $contCiclo) {
+    public function limpar(){
         $this->listaHabitos = [];
-        $this->codHabito = $codHabito;
-        $this->nomeHabito = $nome;
-        $this->categoriaHabito = $categoria;
-        $this->dificuldadeHabito = $dificuldade;
-        $this->contCicloHabito = $contCiclo;
+        $this->codHabito = "";
+        $this->nomeHabito = "";
+        $this->categoriaHabito = "";
+        $this->dificuldadeHabito = "";
+        $this->contCicloHabito = 0;
+        $this->codUsuario = "";
+        $this->dias = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     }
 
+    public function novo(){
+        $mensagem = 0;
+        $banco = new Banco();
+
+        $consulta = "INSERT INTO habito (codHabito,nomeHabito,categoriaHabito,dificuldadeHabito,contCicloHabito,codUsuario) 
+        VALUES ('$this->codHabito','$this->nomeHabito','$this->categoriaHabito','$this->dificuldadeHabito','$this->contCicloHabito','$this->codUsuario');";
+        $resultado = mysqli_query($banco->getConexao(), $consulta);
+
+        $consulta2 = "INSERT INTO ciclo(dia1,dia2,dia3,dia4,dia5,dia6,dia7,dia8,dia9,dia10,dia11,dia12,dia13,dia14,dia15,dia16,dia17,dia18,dia19,dia20,dia21) values
+         ('$this->dias[0]');";
+        $resultado2 =  mysqli_query($banco->getConexao(), $consulta2);
+
+        if ($resultado > 0 AND $resultado2 > 0) {
+            $mensagem = 1;
+        }
+        $banco->fecharConexao();
+        return $mensagem;
+    }
+
+
+    /*
     //CRUD Hábito - Terminar
     function criar() {
         $this->preparaHabito(); //Limpa os dados do DAOHabito
@@ -124,6 +150,7 @@ class DAOHabito {
         }
         mysqli_close($this->conexao);
     }
+    */
     
     
     function getCodHabito() {
@@ -146,6 +173,10 @@ class DAOHabito {
         return $this->contCiclo;
     }
 
+    function getDiasBarra(){
+        return $this->diasBarra;
+    }
+
     function setCodHabito($codHabito) {
         $this->codHabito = $codHabito;
     }
@@ -164,6 +195,10 @@ class DAOHabito {
 
     function setContCiclo($contCiclo) {
         $this->contCicloHabito = $contCiclo;
+    }
+
+    function setDiasBarra($array){
+        $this->diasBarra = $array;
     }
 
     function mostrarHabito() {
