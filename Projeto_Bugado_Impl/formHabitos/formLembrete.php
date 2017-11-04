@@ -9,7 +9,7 @@
 
     <body id="bodyEntrar">  
         <section>
-            <fieldset><h3>Histórico de Hábitos</h3>
+            <fieldset><h3>Lembrete</h3>
                 <!-- TO DO -->
         </section> 
     </body>

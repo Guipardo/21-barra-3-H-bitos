@@ -18,6 +18,7 @@
     <body id="bodyCadastro">  
         <section>
                 <?php 
+                    if(isset($_SESSION['login']) and isset($_SESSION['senha'])){
                     $dao->setLoginUsuario($login);
                     $dao->lerUsuario();
                     $nome = $dao->getNomeUsuario();
@@ -59,8 +60,11 @@
                         <input type='submit' value='Deletar'/>
                     </form></fieldset>
 
-                    <a href='../painelCanvas/Projeto_Bugado_2.0.php'> Voltar </a>";
-                 ?>
+                    <a href='../canvas/painelCanvas.php'> Voltar </a>";
+                } else {
+                    header("Location: ../home.php");
+                }
+                ?>
         </section> 
     </body>
 </html>

@@ -16,6 +16,7 @@ class DAOHabito {
     private $contCicloHabito; // Contador de ciclos da barra
     private $codUsuario; //Login do Usuário que esta relacionado a este hábito
     private $dias; //Array de Quadrados que marcam os dias do ciclo
+    private $lembrete; // Horario de lembrete do hábito
 
 
     function __construct() {
@@ -23,8 +24,8 @@ class DAOHabito {
     }
 
     public function limpar(){
-        $this->listaHabitos = [];
-        $this->codHabito = "";
+        $this->listaHabitos = array();
+        $this->codHabito = 0;
         $this->nomeHabito = "";
         $this->categoriaHabito = "";
         $this->dificuldadeHabito = "";
@@ -37,16 +38,61 @@ class DAOHabito {
         $mensagem = 0;
         $banco = new Banco();
 
-        $consulta = "INSERT INTO habito (codHabito,nomeHabito,categoriaHabito,dificuldadeHabito,contCicloHabito,codUsuario) 
-        VALUES ('$this->codHabito','$this->nomeHabito','$this->categoriaHabito','$this->dificuldadeHabito','$this->contCicloHabito','$this->codUsuario');";
-        $resultado = mysqli_query($banco->getConexao(), $consulta);
+        $consulta = "INSERT INTO habito (codHabito,nomeHabito,categoriaHabito,dificuldadeHabito,contCicloHabito,codUsuario,lembrete) 
+        VALUES ('$this->codHabito','$this->nomeHabito','$this->categoriaHabito','$this->dificuldadeHabito','$this->contCicloHabito','$this->codUsuario',now())";
+        $resultado = mysqli_query($banco->getConexao(), $consulta) or die (mysqli_error($banco->getConexao()));
 
-        $consulta2 = "INSERT INTO ciclo(dia1,dia2,dia3,dia4,dia5,dia6,dia7,dia8,dia9,dia10,dia11,dia12,dia13,dia14,dia15,dia16,dia17,dia18,dia19,dia20,dia21) values
-         ('$this->dias[0]');";
-        $resultado2 =  mysqli_query($banco->getConexao(), $consulta2);
+        $consulta2 = "INSERT INTO ciclo(codCiclo,dia1,dia2,dia3,dia4,dia5,dia6,dia7,dia8,dia9,dia10,dia11,dia12,dia13,dia14,dia15,dia16,dia17,dia18,dia19,dia20,dia21) values
+         ('$this->codHabito',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)";
+        $resultado2 = mysqli_query($banco->getConexao(), $consulta2) or die (mysqli_error($banco->getConexao()));;
 
         if ($resultado > 0 AND $resultado2 > 0) {
             $mensagem = 1;
+        }
+        $banco->fecharConexao();
+        return $mensagem;
+    }
+
+    public function lerHabito(){
+        $mensagem = 0;
+        $banco = new Banco();
+        $consulta = "SELECT * FROM habito WHERE codHabito = '$this->codHabito'";
+        $resultado = mysqli_query($banco->getConexao(),$consulta) or die (mysqli_error($banco->getConexao()));
+        $linhas = mysqli_num_rows($resultado);
+            
+        if($linhas > 0){
+            while ($linha = $resultado->fetch_assoc()) {
+                $this->setCodHabito($linha["codHabito"]);
+                $this->setNomeHabito($linha["nomeHabito"]);
+                $this->setDificuldadeHabito($linha["dificuldadeHabito"]);
+                $this->setContCiclo($linha["contCicloHabito"]);
+                $this->setCodusuario($linha["codUsuario"]);
+                $this->setLembrete($linha["lebrete"]);
+                $mensagem = 1;
+            }
+        }
+        $banco->fecharConexao();
+        return $mensagem;
+    }
+
+    public function lerTodos(){
+        $mensagem = 0;
+        $banco = new Banco();
+        $consulta = "SELECT * FROM habito where codUsuario='$this->codUsuario'";
+        $resultado = mysqli_query($banco->getConexao(),$consulta) or die (mysqli_error($banco->getConexao()));
+        $linhas = mysqli_num_rows($resultado);
+            
+        if($linhas > 0){
+            while ($linha = $resultado->fetch_assoc()) {
+                $this->setCodHabito($linha["codHabito"]);
+                $this->setNomeHabito($linha["nomeHabito"]);
+                $this->setDificuldadeHabito($linha["dificuldadeHabito"]);
+                $this->setContCiclo($linha["contCicloHabito"]);
+                $this->setCodusuario($linha["codUsuario"]);
+                $this->setLembrete($linha["lebrete"]);
+                array_push($this->listaHabitos, $linha);
+                $mensagem = 1;
+            }
         }
         $banco->fecharConexao();
         return $mensagem;
@@ -152,6 +198,9 @@ class DAOHabito {
     }
     */
     
+    function dia($indice){
+        return $dao->diasBarra[$indice];
+    }
     
     function getCodHabito() {
         return $this->codHabito;
@@ -177,6 +226,14 @@ class DAOHabito {
         return $this->diasBarra;
     }
 
+    function getCodusuario(){
+       return $this->codUsuario;
+    }
+
+    function getLembrete(){
+       return $this->lembrete;
+    }
+
     function setCodHabito($codHabito) {
         $this->codHabito = $codHabito;
     }
@@ -197,6 +254,14 @@ class DAOHabito {
         $this->contCicloHabito = $contCiclo;
     }
 
+    function setCodusuario($codUsuario){
+        $this->codUsuario = $codUsuario;
+    }
+
+    function setLembrete($lembrete){
+        $this->lembrete = $lembrete;
+    }
+
     function setDiasBarra($array){
         $this->diasBarra = $array;
     }
@@ -204,5 +269,4 @@ class DAOHabito {
     function mostrarHabito() {
         return $this->codUsuario . "-" . $this->nomeUsuario . "-" . $this->emailUsuario . "-" . $this->senhaUsuario;
     }
-
 }

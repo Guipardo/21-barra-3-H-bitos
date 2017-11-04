@@ -8,7 +8,7 @@ include '../acesso/conexao.php';
 
 class DAOUsuario{
 
-    private $listaUsuarios;
+    private $listaHabitos;
     private $nomeUsuario;
     private $loginUsuario;
     private $emailUsuario;
@@ -23,7 +23,7 @@ class DAOUsuario{
         $this->setLoginUsuario("");
         $this->setEmailUsuario("");
         $this->setSenhaUsuario("");
-        $this->setListaUsuario("");
+        $this->setListaHabitos(array());
     }
 
     public function novo(){
@@ -135,8 +135,8 @@ class DAOUsuario{
         return $this->loginUsuario;
     }
     
-    function getListaUsuario() {
-        return $this->listaUsuarios;
+    function getListaHabitos() {
+        return $this->listaHabitos;
     }
 
     function setNomeUsuario($nomeUsuario) {
@@ -155,8 +155,8 @@ class DAOUsuario{
         $this->loginUsuario = $loginUsuario;
     }
 
-    function setListaUsuario($array) {
-        $this->listaUsuarios = $array;
+    function setListaHabitos($array) {
+        $this->listaHabitos = $array;
     }
 
     function mostrarUsuario() {

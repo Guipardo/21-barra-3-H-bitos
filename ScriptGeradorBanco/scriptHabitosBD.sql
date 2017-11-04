@@ -13,12 +13,13 @@ create table Habito(
 	dificuldadeHabito VARCHAR(50) NOT NULL,
 	contCicloHabito INTEGER NOT NULL,
 	codUsuario VARCHAR(50) NOT NULL,
+	lembrete DATE NULL,
 	PRIMARY KEY(codHabito),
 	FOREIGN KEY(codUsuario) REFERENCES Usuario(login)
 );
 
 create table ciclo(
-	codCiclo INTEGER NOT NULL AUTO_INCREMENT,
+	codCiclo INT NOT NULL AUTO_INCREMENT,
 	dia1 INTEGER,
 	dia2 INTEGER,
 	dia3 INTEGER,

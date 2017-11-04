@@ -33,12 +33,12 @@
                 $mensagem = 0;
             }
 
-            $dao->limpar();
             $dao->setNome($nome);
             $dao->setCategoria($categoria);
             $dao->setDificuldade($dificuldade);
-            $dao->setCodHabito($login);
+            $dao->setCodHabito(0);
             $dao->setContCiclo(0);
+            $dao->setCodUsuario($login);
             $mensagem = $dao->novo();
             
             if($mensagem > 0){

@@ -7,7 +7,7 @@
         <title> Atualizar Hábito </title>  
     </head>
 
-    <body id="bodyEntrar">  
+    <body>  
         <section>
             <fieldset><h3>Atualizar Hábito</h3>
                 <form action="atualizarHabito.php" method="POST">
