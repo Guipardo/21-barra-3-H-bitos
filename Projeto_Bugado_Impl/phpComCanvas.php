@@ -4,8 +4,8 @@
  * 
  */
 
-include_once '../acesso/DAOHabito.php';
-include_once '../acesso/DAOUsuario.php';
+include '../acesso/DAOHabito.php';
+include '../acesso/DAOUsuario.php';
 
     function carregarDAO($login){
         $dao = new DAOHabito();
@@ -33,6 +33,11 @@ include_once '../acesso/DAOUsuario.php';
         }
     }
 
+    function atualizarLembrete($data,$habito){
+        $habito->setLembrete($data);
+        $habito->definirLembrete();
+    }
+
     function getNomeUsuario($login){
         $dao = new DAOUsuario();
         $dao->setLoginUsuario($login);
@@ -40,6 +45,9 @@ include_once '../acesso/DAOUsuario.php';
         return $dao->getNomeUsuario();
     }
 
+    function getTodosDias($habito){
+        return $habito->getDias();
+    }
     
     /* ------------------------------------------------------------------------------- */
 
@@ -51,14 +59,12 @@ include_once '../acesso/DAOUsuario.php';
     }
 
     function lerHabitoPeloIndice($dao,$indice){
-        $array = $dao->getListaHabitos();
-        for($i = 0; $i < count($array);$i++){
-            if($indice == $i){
-                $cod = $array[$i]->getCodHabito();
-                $dao->setCodHabito($cod);
-                $dao->lerHabito();
-                return $dao;
-            }    
+        foreach ($dao->getListaHabitos() as $chave => $habito) {
+            if($indice == $chave){
+                $dao->setCodHabito($habito['codHabito']);
+            }
         }
-    }  
+        $dao->lerHabito();
+        return $dao;
+    }
 ?>

@@ -74,19 +74,15 @@ class DAOHabito {
         }
         
         $consulta2 = "SELECT * FROM ciclo WHERE codCiclo = '$this->codHabito'";
-        $resultado2 = mysqli_query($banco->getConexao(),$consulta) or die (mysqli_error($banco->getConexao()));
-        $linhas2 = mysqli_num_rows($resultado2);
-            
-        if($linhas2 > 0){
-            while ($linha = $resultado2->fetch_assoc()) {
-                for($i = 0;$i < count($this->dias);$i++){
-                    $chave = "dia".($i+1);
-                    $this->dias[$i] = $linha['$chave'];
-                }
-                $mensagem = 1;
+        $resultado2 = mysqli_query($banco->getConexao(),$consulta2);
+
+        $linha = mysqli_fetch_array($resultado2);
+        if($linha != null){
+            for($i = 0;$i < 21;$i++){
+                $dao->dias[$i] = $linha[$i+1];
             }
-        }
-        
+            $mensagem = 1;
+        }    
         $banco->fecharConexao();
         return $mensagem;
     }
@@ -134,7 +130,6 @@ class DAOHabito {
     	$mensagem = 0;
         $banco = new Banco();
         $consulta = "UPDATE Habito SET nomeHabito='$this->nomeHabito',categoriaHabito='$this->categoriaHabito' where codUsuario='$this->codUsuario' AND nomeHabito='$nomeAntigo'";
-        echo $consulta;
 		$resultado = mysqli_query($banco->getConexao(), $consulta);
         if ($resultado > 0) {
             $mensagem = 1;
@@ -192,8 +187,12 @@ class DAOHabito {
         return $this->contCicloHabito;
     }
 
-    function getDiasBarra(){
-        return $this->diasBarra;
+    function getDias(){
+        return $this->dias;
+    }
+    
+    function getDia($indice){
+        return $this->dias[$indice];
     }
 
     function getCodusuario(){
@@ -236,8 +235,8 @@ class DAOHabito {
         $this->lembrete = $lembrete;
     }
 
-    function setDiasBarra($array){
-        $this->diasBarra = $array;
+    function setDias($array){
+        $this->dias = $array;
     }
 
     function mostrarHabitos() {

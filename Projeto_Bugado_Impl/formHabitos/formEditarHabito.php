@@ -1,7 +1,7 @@
 <?php
-    session_start();
     include '../phpComCanvas.php';
     include '../usuario/validacoes.php';
+    session_start();
     $login = $_SESSION["login"];
     $dao = carregarHabitosPeloLogin($login);
     $quantHabitos = count($dao->getListaHabitos());
@@ -19,7 +19,7 @@
     <body>
         <section>
             <?php 
-                if(isset($_SESSION['login']) and isset($_SESSION['senha'])){
+                if(isset($_SESSION['login'])){
                    $dao2 = new DAOHabito();
                     for ($i = 0; $i < $quantHabitos; $i++) {
                     $dao2 = lerhabitoPeloIndice($dao,$i);

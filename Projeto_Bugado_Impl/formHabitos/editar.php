@@ -2,6 +2,7 @@
 <?php
     include '../acesso/DAOHabito.php';
     include '../usuario/validacoes.php';
+    session_start();
     $dao = new DAOHabito();
     $mensagem = 1;
     $login = $_SESSION["login"];

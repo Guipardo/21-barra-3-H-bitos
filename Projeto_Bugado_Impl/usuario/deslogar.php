@@ -6,6 +6,6 @@
 <?php
 	session_start();
     session_destroy();
-    echo "<a>Carregando</a>";
+    echo "<a>Carregando...</a>";
     echo "<script language='javascript'>deslogar()</script>";
 ?>

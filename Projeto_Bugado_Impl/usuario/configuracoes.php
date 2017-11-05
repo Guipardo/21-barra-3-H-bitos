@@ -19,7 +19,6 @@
     <body id="bodyCadastro">
         <section>
             <?php 
-            session_start();
                     if(isset($_SESSION['login']) and isset($_SESSION['senha'])){
                     $dao->setLoginUsuario($login);
                     $dao->lerUsuario();
