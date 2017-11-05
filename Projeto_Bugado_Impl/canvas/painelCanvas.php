@@ -1,8 +1,44 @@
 <!Doctype html>
 <html>
     <head>
-        <title>Projetão!</title>
-        <meta charset="utf-8">   
+        <title> Habit creator </title>
+        <meta charset="utf-8">
+        
+        <?php
+            include "../phpComCanvas.php";
+            session_start();
+            /* LISTA DE VARIAVEIS */
+            $login = $_SESSION["login"];
+            $dao = carregarDAO($login); //Carrega todos os hábitos cadastrados
+            $habito = lerHabitoPeloIndice($dao,0); /*
+                Seleciona um dos hábitos pelo indice, que é passado por parametro
+                Por padrão é o índice 0 que se refere ao primeiro hábito
+            */
+        
+            /* Atributos do Hábito */
+            $nomeHabito = getAtributoHabito($habito,"nome");
+            $categoriaHabito = getAtributoHabito($habito,"categoria");
+            $dificuldadeHabito = getAtributoHabito($habito,"dificuldade");
+            $ciclo = getAtributoHabito($habito,"ciclo");
+            $lembrete = getAtributoHabito($habito,"lembrete");
+            $dias = getAtributoHabito($habito,"dias").
+        
+            /* Atributos do usuário */
+            $nomeUsuario = getNomeUsuario($login); //Pega o nome do usuário pelo Login da sessão
+            
+            echo $habito->getCodHabito();
+            
+            /*
+            686 à 691 -> botoes html que devem usar php
+            
+            527/530 -> começa codigo para ler array php contendo objetos com os parametros de cada habito;
+            
+            a partir da linha 532 -> variavel de pontuaçao. 
+            */
+            
+        ?>
+        
+        
         <script type="text/javascript">
             window.onload = function(){
                 var canvas = document.getElementById("LookAtMyCrazyDrawing");
@@ -111,13 +147,105 @@
 
                 ctxR.closePath();
                 
+                var canvas5 = document.getElementById("abaLembrete");
+                var ctxLbrt = canvas5.getContext("2d");
+                canvas5.width = 420;
+                canvas5.height = 200;
+                var dLarg = ((innerWidth/2)-200);
+                var dAlt = ((innerHeight/2)-210);
+                canvas5.style.display = 'block';
+                canvas5.style.position = 'absolute';
+                canvas5.style.left = (dLarg+"px");
+                canvas5.style.top = (dAlt+"px");
+                canvas5.style.backgroundColor = "gray";
+                canvas5.style.border = "2px solid";
+                canvas5.style.zIndex = "-3";
                 
+                var canvas6 = document.getElementById("backLembrete");
+                var ctxLbrtBack = canvas6.getContext("2d");
+                canvas6.width = innerWidth;
+                canvas6.height = innerHeight;
+                canvas6.style.display = 'block';
+                canvas6.style.position = 'absolute';
+                canvas6.style.left ="0px";
+                canvas6.style.top = "0px";
+                canvas6.style.opacity = "0.7";
+                canvas6.style.backgroundColor = "dimgray";
+                canvas6.style.zIndex = "-4";
                 
                 
                 var css = document.createElement("STYLE");
-                var botoesUp = document.createTextNode("#Novo, #Editar, #Apagar, #DefLembr, #setaB, #setaCircle { background-color: rgba(20,101,245,125); color: white; font-family: Arial; text-align: center; font-size: 20px; display: block; border: 2px solid rgba(20,11,205,125); border-radius: 12px; cursor: pointer; position: absolute; top: 130px; box-shadow: 0px 0px 10px black;} button:active {background-color: rgba(10,84,222,125); color: white; transform: translateY(4px);} button:hover{ background-color: rgba(10,84,222,125);}");
+                var botoesUp = document.createTextNode("#Novo, #Editar, #Apagar, #DefLembr, #setaB, #setaCircle, #cancelar, #enviar { background-color: rgba(20,101,245,125); color: white; font-family: Arial; text-align: center; font-size: 20px; display: block; border: 2px solid rgba(20,11,205,125); border-radius: 12px; cursor: pointer; box-shadow: 0px 0px 10px black;} button:active {background-color: rgba(10,84,222,125); color: white; transform: translateY(4px);} button:hover{ background-color: rgba(10,84,222,125);} #Novo, #Editar, #Apagar, #DefLembr, #setaB, #setaCircle {position: absolute; top: 130px; }                                                                                                                                                                  #fMinutes, #fHours{ position: absolute; height: 70px; width: 50px}");
                 css.appendChild(botoesUp);
                 document.head.appendChild(css);
+                
+                /*var enviar = document.getElementById("enviar");
+                enviar.style.backgroundColor = "rgba(20,101,245,125)";
+                enviar.style.color ="white";
+                enviar.style.fontFamily = "Arial";
+                enviar.style.textAlign = "center";
+                enviar.style.fontSize = "20px";
+                enviar.style.display = "block"
+                enviar.style.border = "border: 2px solid rgba(20,11,205,125)";*/
+
+                
+                
+                
+                var form = document.getElementById("formulario");
+                form.style.position = "absolute";
+                form.style.left = ((dLarg)+"px");
+                form.style.top = ((dAlt+70)+"px");
+                form.style.width = "420px";
+                form.style.height = "130px";
+                form.style.border = "none";
+                form.style.zIndex = "-3";
+
+            
+                
+               // alert(fHours.value);
+                
+                var fHours = document.getElementById("fHours");
+
+                for(i=0; i<24; i++){
+                    var formHours = document.createElement("option");
+                    var textoHora = document.createTextNode("");
+                    textoHora.nodeValue = i;
+                    formHours.appendChild(textoHora);               
+                    fHours.appendChild(formHours);
+                }
+                fHours.style.left = "90px";
+                
+                var fMinutes = document.getElementById("fMinutes");
+
+                for(i=0; i<60; i++){
+                    var formMinutes = document.createElement("option");
+                    var textomin = document.createTextNode("");
+                    textomin.nodeValue = i;
+                    formMinutes.appendChild(textomin);                
+                    fMinutes.appendChild(formMinutes);
+                }
+                fMinutes.style.position = "absolute";
+                fMinutes.style.left = ((320)+"px");
+                
+                var cancelar = document.getElementById("cancelar");
+                cancelar.style.position = "absolute";
+                cancelar.style.left = "220px";
+                cancelar.style.top = "90px";
+                cancelar.style.borderColor = "black";
+                cancelar.style.backgroundColor = "dimgray";
+                cancelar.style.color = "white";
+                
+                var enviar = document.getElementById("enviar");
+                enviar.style.position = "absolute";
+                enviar.style.left = "120px";
+                enviar.style.top = "90px";
+                enviar.style.borderColor = "black";
+                enviar.style.backgroundColor = "dimgray";
+                enviar.style.color = "white";
+
+                
+                
+                
                 
                 var novo = document.getElementById("Novo");
                 novo.style.left = "105px";
@@ -312,24 +440,31 @@
                 
                 
                 
-                function habito(pxFont, color, strg, xFont, yFont, ciclo, cpX1, cpY1,largura, altura){
+                function habito(nomeHabt, diaHbt, horaHbt, minHabt, catgorHbt, difculHbt, ciclo){
+                    const pxFont = "25px Arial";
+                    const color = "black";
+                    const xFont = 235;
+                    const yFont = 330;
+                    const cpX1 = 200;
+                    const cpY1 = 350;
+                    const largura = 950;
+                    const altura = 150;
+                    this.ciclo = ciclo;
+                    this.nomeHabt = nomeHabt;
+                    this.diaHbt =diaHbt;
+                    this.horaHbt = horaHbt;
+                    this.minHabt = minHabt;
+                    this.catgotHbt = catgorHbt;
+                    this.difculHbt = difculHbt;
                     
-                    this.pxFont = pxFont;
-                    this.color = color;
-                    this.strg = strg;
-                    this.xFont = xFont;
-                    this.yFont = yFont;
+                    var controlLembr=0; 
+                    this.controlLembr=controlLembr;
                     
-                    this.cpX1 = cpX1;
-                    this.cpY1 = cpY1;
                     
-                    this.largura = largura;
-                    this.altura = altura;
-                    
-                    var xH1 = cpX1+20;
+                    var xH1 = cpX1+20;// xH1 = 220
                     var yH1 = cpY1;
                     var xV1 = cpX1;
-                    var yV1 = cpY1 + 30;
+                    var yV1 = cpY1 + 30;// yV1 = 380
                     
                      
                     var cpX2 = cpX1;
@@ -361,7 +496,7 @@
                     
                     
                     var listaDias = [];
-                    
+                    this.listaDias = listaDias;///////////////////////////////////////////////////
                     for(i=0; i<21; i++){
                         if(i%2 == 0){
                             listaDias.push("red");
@@ -388,7 +523,7 @@
                         context.shadowColor = "rgba(201,241,253,214)";
                         
                         context.closePath();
-                        write(pxFont, color, "Hábito", xFont, yFont-15);
+                        write(pxFont, color, nomeHabt, xFont, yFont-15);
                         
                         context.beginPath();
                         context.moveTo(xH1,yH1);
@@ -459,7 +594,7 @@
                         
                         context.beginPath();
                         var xQuadrado = xH1;
-                        var yQuadrado = yV1+22;
+                        var yQuadrado = yV1+22; //yQuadrado = 402
                         for(i=0; i<21; i++){
                             context.fillStyle = listaDias[i];
                             context.fillRect(xQuadrado, yQuadrado,43,40);
@@ -492,7 +627,8 @@
                         }
                         context.closePath();
                         
-                        write("bolder 20px Arial", color, "Ler mais livros       Dia Atual: 14       Lembrete: 14:00       Categoria: Leitura       Dificuldade: Fácil", xH1-5, yV1);//7espaços entre os blocos de informaçao na string.
+                       // write("bolder 20px Arial", color, strg+"       Dia Atual: 14       Lembrete: 14:00       Categoria: Leitura       Dificuldade: Fácil", xH1-5, yV1);//7espaços entre os blocos de informaçao na string.
+                        write("bolder 20px Arial", color, ("Dia Atual: "+diaHbt+"                   Lembrete: "+horaHbt+":"+minHabt+"                   Categoria: "+catgorHbt+"                   Dificuldade: "+difculHbt), xH1-5, yV1);
                     
                     }
                     
@@ -504,18 +640,23 @@
                             listaDias[i]=("white");
                         }
                     }
+                    
+                    
                 }
                 
-                var ler = new habito("25px Arial","black", "Ler mais livros", 235, 330, 1, 200, 350, 950, 150);
+                var ler = new habito("Ler mais livros",14,00,00,"leitura","facil", 1);
                 //ler.retanguloHabito();
                 //ler.mostraCiclo();
                 //ler.graficoHabito();
                 
-                var teste = new habito("25px Arial", "red", "Busty Buffy", 235, 330, 2, 200, 350, 950, 150);
+                var teste = new habito("Busty Buffy", 14,01,50,"leitura","facil", 2); // problema de espaçamento
                 
                 var listaHabitos = new Array();
                 listaHabitos.push(teste);
                 listaHabitos.push(ler);
+                
+                //teste.lembreteActive();
+                //ler.lembreteActive();
                 
                 var numHabito = 0;
                 listaHabitos[numHabito].retanguloHabito();
@@ -529,6 +670,7 @@
                         listaHabitos[numHabito].retanguloHabito();
                         listaHabitos[numHabito].mostraCiclo();
                         listaHabitos[numHabito].graficoHabito();
+                        lembreteActive();
                         }
                     
                     
@@ -542,6 +684,7 @@
                         listaHabitos[numHabito].retanguloHabito();
                         listaHabitos[numHabito].mostraCiclo();
                         listaHabitos[numHabito].graficoHabito();
+                        lembreteActive();
                     }
                     
                     
@@ -551,6 +694,7 @@
                 
                 setaC.addEventListener("click", function(){
                    listaHabitos[numHabito].reset();
+                   listaHabitos[numHabito].diaHbt=0;
                    listaHabitos[numHabito].graficoHabito();
                });
                 
@@ -563,7 +707,9 @@
                     if (((mouseX-7)>=x1) && ((mouseX+7)<=x2) &&  ((mouseY-7)>=y1) && ((mouseY+7)<=y2)){
                         
                         if((mouseY+5)>=257){
-                            
+                            canvas2.onclick = function(){
+                                window.location = "../usuario/deslogar.php";
+                            }
                             context2.beginPath();
                             
                             context2.clearRect(0, 0, 200, 75);
@@ -586,7 +732,9 @@
                         }
                         else{
                             
-                            
+                            canvas2.onclick = function(){
+                                window.location = "../usuario/configuracoes.php";
+                            }
                             context2.beginPath();
                             
                             context2.clearRect(0, 75, 200, 45);
@@ -632,6 +780,132 @@
                     }
                 }
                 
+                function clickQuadrado (){
+                    var mouseX = event.pageX;
+                    var mouseY = event.pageY;
+                    var check = 220;
+                    if(mouseY>=402 && mouseY<=442){
+                        if(mouseX>=220 && mouseX<=1123){
+                            for(i=0; i<21; i++){
+                                var corList = listaHabitos[numHabito].listaDias[i];
+                                if((i+1)>=(listaHabitos[numHabito].diaHbt)){
+                                    if(mouseX>=check && mouseX<=(check+43)){
+                                    
+                                        switch(corList){
+                                            case "white":
+                                                listaHabitos[numHabito].listaDias[i] = "green";
+                                                break;
+                                            case "green":
+                                                listaHabitos[numHabito].listaDias[i] = "red";
+                                                break;
+                                            case "red":
+                                                listaHabitos[numHabito].listaDias[i] = "white";
+                                                break;
+                                        }
+                                    
+                                        context.clearRect(100, 280, 1100, 400);
+                                        listaHabitos[numHabito].retanguloHabito();
+                                        listaHabitos[numHabito].mostraCiclo();
+                                        listaHabitos[numHabito].graficoHabito();
+                                        break;
+                                    }
+                                }
+                                
+                                check+=43;
+                            }
+                        }
+                    }
+                }
+                
+                canvas.onclick = function(){clickQuadrado()}
+                
+              //  var today = new Date();
+               // var h = "14";
+                //alert(h);
+                
+                defL.onclick = function(){lembrete()}
+                
+                function lembrete(){
+                    ctxLbrt.beginPath();
+                    ctxLbrt.clearRect(0, 0, innerWidth,innerHeight);
+                    ctxLbrt.font = "21px Arial";
+                    ctxLbrt.fillStyle = "white";
+                    ctxLbrt.fillText(("Definir lembrete do hábito: "+ listaHabitos[numHabito].nomeHabt), 10, 35);
+                    ctxLbrt.fillText("Hora: ", 25, 110);
+                    ctxLbrt.fillText("Minuto: ", 240, 110);
+                    ctxLbrt.strokeStyle = "black";
+                    ctxLbrt.moveTo(0, 50);
+                    ctxLbrt.lineTo(420, 50);
+                    ctxLbrt.lineWidth = 2;
+                    ctxLbrt.stroke();
+                    ctxLbrt.fill();
+                    ctxLbrt.closePath();
+                    
+                    canvas6.style.zIndex = "0";
+                    canvas5.style.zIndex = "1";
+                    form.style.zIndex = "2";
+
+
+                }
+                
+                
+                enviar.onclick = function(){
+                    var hnum = fHours.value;
+                    var mnum = fMinutes.value;
+                    canvas6.style.zIndex = "-4";
+                    canvas5.style.zIndex = "-3";
+                    form.style.zIndex = "-3";
+                    listaHabitos[numHabito].horaHbt = hnum;
+                    listaHabitos[numHabito].minHabt = mnum;
+                    context.clearRect(100, 280, 1100, 400);
+                    listaHabitos[numHabito].retanguloHabito();
+                    listaHabitos[numHabito].graficoHabito();
+                    listaHabitos[numHabito].mostraCiclo();
+                    
+                }
+               // alert(listaHabitos[numHabito].controlLembr);
+                
+                lembreteActive();
+                function lembreteActive(){
+                        var data = new Date();
+                        var hora = data.getHours();
+                        
+                        if(listaHabitos[numHabito].controlLembr==0){
+                            
+                            if(hora>=(listaHabitos[numHabito].horaHbt)){
+                                //alert(hora+" "+horaHbt);
+                                ctxLbrt.beginPath();
+                                ctxLbrt.clearRect(0, 0, innerWidth,innerHeight);
+                                ctxLbrt.font = "21px Arial";
+                                ctxLbrt.fillStyle = "white";
+                                ctxLbrt.fillText("Lembrete!", 150, 35);
+                                ctxLbrt.fillText("Realizar hábito: "+(listaHabitos[numHabito].nomeHabt), 40, 110);
+                                ctxLbrt.strokeStyle = "black";
+                                ctxLbrt.moveTo(0, 50);
+                                ctxLbrt.lineTo(420, 50);
+                                ctxLbrt.lineWidth = 2;
+                                ctxLbrt.stroke();
+                                ctxLbrt.fill();
+                                ctxLbrt.closePath();
+                                canvas5.style.zIndex = "1";
+                                canvas6.style.zIndex = "0";
+
+                            }
+                        }
+                        canvas5.onclick=function(){
+                            canvas5.style.zIndex = "-3";
+                            canvas6.style.zIndex = "-4";
+                        }
+                        canvas6.onclick=function(){
+                            canvas5.style.zIndex = "-3";
+                            canvas6.style.zIndex = "-4";
+                        }
+                        listaHabitos[numHabito].controlLembr = 1;
+                    }
+                
+                //var d = new Date();
+               // var lj = d.getHours();
+               // alert(lj);
                 
                 function clickSeta(x1, y1, x2, y2,controle){
                     var mouseX = event.pageX;
@@ -652,7 +926,7 @@
                     
                 }
                 
-                
+
                 // Tambem funciona canvas.addEventListener("mousemove", function(){posMouse(30, 280, 900, 430)});
                 //canvas.onmousemove = function(){posMouse(30, 280, 900, 430)}
                 //canvas.addEventListener("onclick", function(){clickSeta(30, 280, 900, 430,var controle = 0)});
@@ -664,17 +938,35 @@
     </head>
     <body>
         
-        <canvas id="LookAtMyCrazyDrawing" ></canvas>
+         <canvas id="LookAtMyCrazyDrawing" ></canvas>
         <button id="Novo"><a href='../formHabitos/formNovoHabito.php' style="text-decoration:none;color:white">Novo</a></button>
         <button id="Editar"><a href='../formHabitos/formEditarHabito.php' style="text-decoration:none;color:white">Editar</a></button>
         <button id="Apagar"><a href='../formHabitos/formApagarHabito.php' style="text-decoration:none;color:white">Apagar</a></button>
-        <button id="DefLembr"><a href='../formHabitos/formLembrete.php' style="text-decoration:none;color:white">Definir lembrete</a></button>
+        <button id="DefLembr"><a>Definir lembrete</a></button>
         <button id="setaB"><img src="setaBlue.png" height="50" width="45" id="setaVesga"></button>
-        <button id="setaCircle"><img src="setaBlueCircle.png" height="50" width="45"></button>
+        <button id="setaCircle"><img src="setaBlueCircle.png" height="50" width="45" ></button>
         <a id="nameUser"></a>
         <canvas id="abaUser"></canvas>
         <canvas id="setRig"></canvas>
         <canvas id="setLef"></canvas>
+        <canvas id="abaLembrete"></canvas>
+        <canvas id="backLembrete"></canvas>
+
+        
+        <form id="formulario">
+            <select name="horas" size="3" id="fHours">
+            </select>
+        
+            <select name="minutos" size="3" id="fMinutes">
+            </select>
+            <br>
+            <button id="enviar" type="button">Enviar</button>
+            <a></a>
+            <button id="cancelar">Cancelar</button>
+
+
+        </form>
+
         
     </body>
 </html>

@@ -7,16 +7,18 @@
     session_start();
     $login = $_SESSION["login"];
 ?>
-<html lang="pt-br">
+    <html lang="pt-br">
+
     <head>
         <meta charset="utf-8">
         <title>Alterar dados</title>
         <script language="javascript">
-            function deletado(){
+            function deletado() {
                 setTimeout("window.location='../home.php'", 2000);
             }
         </script>
     </head>
+
     <body>
         <?php
             $opcao = $_POST["opcao"];
@@ -68,4 +70,5 @@
             }
         ?>
     </body>
-</html>
+
+    </html>

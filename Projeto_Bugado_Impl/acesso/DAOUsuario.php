@@ -3,8 +3,7 @@
 /*
  * Este arquivo faz o crud de usuário no banco de dados
  */
-
-include '../acesso/conexao.php';
+include_once '../acesso/conexao.php';
 
 class DAOUsuario{
 

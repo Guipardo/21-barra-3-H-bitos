@@ -5,16 +5,18 @@
     $dao = new DAOUsuario();
     $mensagem = 1;
 ?>
-<html lang="pt-br">
+    <html lang="pt-br">
+
     <head>
         <meta charset="utf-8">
         <title>Cadastro</title>
         <script language="javascript">
-        function sucesso(){
+            function sucesso() {
                 setTimeout("window.location='../formLogin.php'", 3000);
-        }  
-    	</script>
+            }
+        </script>
     </head>
+
     <body>
         <?php
             $nome = $_POST["nome"];
@@ -59,5 +61,5 @@
             }
         ?>
     </body>
-</html>
 
+    </html>

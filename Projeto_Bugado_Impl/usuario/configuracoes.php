@@ -7,17 +7,19 @@
     $login = $_SESSION["login"];
     $senha = $_SESSION["senha"];
 ?>
-<html>
+    <html>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="design.css"/>
-        <title> Configurações </title>  
+        <link rel="stylesheet" type="text/css" href="design.css" />
+        <title> Configurações </title>
     </head>
 
-    <body id="bodyCadastro">  
+    <body id="bodyCadastro">
         <section>
-                <?php 
+            <?php 
+            session_start();
                     if(isset($_SESSION['login']) and isset($_SESSION['senha'])){
                     $dao->setLoginUsuario($login);
                     $dao->lerUsuario();
@@ -65,6 +67,7 @@
                     header("Location: ../home.php");
                 }
                 ?>
-        </section> 
+        </section>
     </body>
-</html>
+
+    </html>

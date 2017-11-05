@@ -3,8 +3,7 @@
 /*
  *  Este arquivo faz o crud dos hábitos no banco de dados
  */
-
-include '../acesso/conexao.php';
+include_once '../acesso/conexao.php';
 
 class DAOHabito {
 
@@ -57,6 +56,7 @@ class DAOHabito {
         $mensagem = 0;
         $banco = new Banco();
         $consulta = "SELECT * FROM habito WHERE codHabito = '$this->codHabito'";
+        
         $resultado = mysqli_query($banco->getConexao(),$consulta) or die (mysqli_error($banco->getConexao()));
         $linhas = mysqli_num_rows($resultado);
             
@@ -64,10 +64,42 @@ class DAOHabito {
             while ($linha = $resultado->fetch_assoc()) {
                 $this->setCodHabito($linha["codHabito"]);
                 $this->setNomeHabito($linha["nomeHabito"]);
+                $this->setCategoriaHabito($linha["categoriaHabito"]);
                 $this->setDificuldadeHabito($linha["dificuldadeHabito"]);
-                $this->setContCiclo($linha["contCicloHabito"]);
+                $this->setContCicloHabito($linha["contCicloHabito"]);
                 $this->setCodusuario($linha["codUsuario"]);
-                $this->setLembrete($linha["lebrete"]);
+                $this->setLembrete($linha["lembrete"]);
+                $mensagem = 1;
+            }
+        }
+        
+        $consulta2 = "SELECT * FROM ciclo WHERE codCiclo = '$this->codHabito'";
+        $resultado2 = mysqli_query($banco->getConexao(),$consulta) or die (mysqli_error($banco->getConexao()));
+        $linhas2 = mysqli_num_rows($resultado2);
+            
+        if($linhas2 > 0){
+            while ($linha = $resultado2->fetch_assoc()) {
+                for($i = 0;$i < count($this->dias);$i++){
+                    $chave = "dia".($i+1);
+                    $this->dias[$i] = $linha['$chave'];
+                }
+                $mensagem = 1;
+            }
+        }
+        
+        $banco->fecharConexao();
+        return $mensagem;
+    }
+    
+    public function habitoExiste($nome,$login){
+        $mensagem = 0;
+        $banco = new Banco();
+        $consulta = "SELECT * FROM habito WHERE nomeHabito ='$nome' AND codUsuario='$login'";
+        $resultado = mysqli_query($banco->getConexao(),$consulta) or die (mysqli_error($banco->getConexao()));
+        $linhas = mysqli_num_rows($resultado);
+            
+        if($linhas > 0){
+            while ($linha = $resultado->fetch_assoc()) {
                 $mensagem = 1;
             }
         }
@@ -78,7 +110,7 @@ class DAOHabito {
     public function lerTodos(){
         $mensagem = 0;
         $banco = new Banco();
-        $consulta = "SELECT * FROM habito where codUsuario='$this->codUsuario'";
+        $consulta = "SELECT * FROM habito where codUsuario='$this->codUsuario';";
         $resultado = mysqli_query($banco->getConexao(),$consulta) or die (mysqli_error($banco->getConexao()));
         $linhas = mysqli_num_rows($resultado);
             
@@ -87,9 +119,9 @@ class DAOHabito {
                 $this->setCodHabito($linha["codHabito"]);
                 $this->setNomeHabito($linha["nomeHabito"]);
                 $this->setDificuldadeHabito($linha["dificuldadeHabito"]);
-                $this->setContCiclo($linha["contCicloHabito"]);
+                $this->setContCicloHabito($linha["contCicloHabito"]);
                 $this->setCodusuario($linha["codUsuario"]);
-                $this->setLembrete($linha["lebrete"]);
+                $this->setLembrete($linha["lembrete"]);
                 array_push($this->listaHabitos, $linha);
                 $mensagem = 1;
             }
@@ -98,106 +130,44 @@ class DAOHabito {
         return $mensagem;
     }
 
-
-    /*
-    //CRUD Hábito - Terminar
-    function criar() {
-        $this->preparaHabito(); //Limpa os dados do DAOHabito
-        //Preparando o Statement
-        $statement = $this->conexao->prepare("INSERT INTO Habito (nome,categoria,dificuldade,contCiclo) VALUES (?,?,?,0)");
-        $statement->bind_param("sssi", $this->getNome(), $this->getCategoria(), $this->getDificuldade());
-
-        //Executando o Statement
-        $resultado = mysql_query($statement, $this->conexao) or die(mysql_error());
-
-        //Tratando os resultados
-        if (mysql_num_rows($resultado) > 0) {
-            print "Hábito inserido com sucesso!";
-        } else {
-            print "Não foi possível inserir um Hábito!";
+    function atualizar($nomeAntigo) {
+    	$mensagem = 0;
+        $banco = new Banco();
+        $consulta = "UPDATE Habito SET nomeHabito='$this->nomeHabito',categoriaHabito='$this->categoriaHabito' where codUsuario='$this->codUsuario' AND nomeHabito='$nomeAntigo'";
+        echo $consulta;
+		$resultado = mysqli_query($banco->getConexao(), $consulta);
+        if ($resultado > 0) {
+            $mensagem = 1;
         }
-        mysqli_close($this->conexao);
+        $banco->fecharConexao();
+        return $mensagem;
     }
 
-    //Atributo - Qual informação do usuário deseja retornar
-    public function lerPeloNome() {
-        //Preparando o Statement
-        $statement = $this->conexao->prepare("SELECT * from Habito where codHabito=?");
-        $statement->bind_param("s", $this->getCodHabito());
-        //Executando o Statement
-        $resultado = mysql_query($statement, $this->conexao) or die(mysql_error());
-        //Tratando os resultados
-        if (mysql_num_rows($resultado) > 0) {
-            while ($linha = $resultado->fetch_assoc()) {
-                $this->setNomeHabito($linha["nomeHabito"]);
-                $this->setCategoriaHabito($linha["categoriaHabito"]);
-                $this->setDificuldadeHabito($linha["dificuldadeHabito"]);
-            }
-        } else {
-            print " Hábito não encontrado ";
+    function apagar() {
+    	$mensagem = 0;
+        $banco = new Banco();
+        $consulta = "DELETE from Habito where codUsuario='$this->codUsuario' AND nomeHabito='$this->nomeHabito'";
+		$resultado = mysqli_query($banco->getConexao(), $consulta);
+        if ($resultado > 0) {
+            $mensagem = 1;
         }
-        mysqli_close($this->conexao);
+        $banco->fecharConexao();
+        return $mensagem;
     }
-
-    function lerTodos() {
-        //Preparando o Statement
-        $statement = $this->conexao->prepare("SELECT * from Habito");
-
-        //Executando o Statement
-        $resultado = mysql_query($statement, $this->conexao) or die(mysql_error());
-        //Tratando os resultados
-        if (mysql_num_rows($resultado) > 0) {
-            while ($linha = $resultado->fetch_assoc()) {
-                $this->setNomeHabito($linha["nomeHabito"]);
-                $this->setCategoriaHabito($linha["categoriaHabito"]);
-                $this->setDificuldadeHabito($linha["dificuldadeHabito"]);
-                $this->setCodHabito($linha["codHabito"]);
-                array_push($this->listaHabitos, $linha);
-            }
-        } else {
-            print " Hábito não encontrado ";
-        }
-        mysqli_close($this->conexao);
-    }
-
-    function atualizar() {
-        $this->preparaHabito();
-
-        $habito = $this->lerPeloNome();
-
-        //Preparando o Statement
-        $statement = $this->conexao->prepare("UPDATE Habito set nomeHabito=?,categoriaHabito=?,dificuldadeHabito=? where codHabito=?");
-        $statement->bind_param("sssi", $this->getNome(), $this->getCategoria(), $this->getDificuldade(), $habito->getCodHabito());
-
-        //Executando o Statement
-        $resultado = mysql_query($statement, $this->conexao) or die(mysql_error());
-
-        //Tratando os resultados
-        if (mysql_num_rows($resultado) > 0) {
-            print "Hábito atualizado com sucesso!";
-        } else {
-            print "Não foi possível atualizar um hábito!";
-        }
-        mysqli_close($this->conexao);
-    }
-
-    function deletar() {
-
-        //Preparando o Statement
-        $statement = $this->conexao->prepare("DELETE from Habito where codHabito=?");
-        $statement->bind_param("s", $this->getCodHabito());
-        //Executando o Statement
-        $resultado = mysql_query($statement, $this->conexao) or die(mysql_error());
-        //Tratando os resultados
-        if (mysql_num_rows($resultado) > 0) {
-            print ("Habito deletado com sucesso");
-        } else {
-            print " Falha ao deletar ";
-        }
-        mysqli_close($this->conexao);
-    }
-    */
     
+    function definirLembrete(){
+        $mensagem = 0;
+        $banco = new Banco();
+        $consulta = "UPDATE Habito SET lembrete='$this->lembrete' where codUsuario='$this->codUsuario' AND nomeHabito='$nomeAntigo'";
+        echo $consulta;
+		$resultado = mysqli_query($banco->getConexao(), $consulta);
+        if ($resultado > 0) {
+            $mensagem = 1;
+        }
+        $banco->fecharConexao();
+        return $mensagem;
+    }
+
     function dia($indice){
         return $dao->diasBarra[$indice];
     }
@@ -206,20 +176,20 @@ class DAOHabito {
         return $this->codHabito;
     }
 
-    function getNome() {
-        return $this->nome;
+    function getNomeHabito() {
+        return $this->nomeHabito;
     }
 
-    function getCategoria() {
-        return $this->categoria;
+    function getCategoriaHabito() {
+        return $this->categoriaHabito;
     }
 
-    function getDificuldade() {
-        return $this->dificuldade;
+    function getDificuldadeHabito() {
+        return $this->dificuldadeHabito;
     }
 
-    function getContCiclo() {
-        return $this->contCiclo;
+    function getContCicloHabito() {
+        return $this->contCicloHabito;
     }
 
     function getDiasBarra(){
@@ -233,24 +203,28 @@ class DAOHabito {
     function getLembrete(){
        return $this->lembrete;
     }
+    
+    function getListaHabitos(){
+        return $this->listaHabitos;
+    }
 
     function setCodHabito($codHabito) {
         $this->codHabito = $codHabito;
     }
 
-    function setNome($nome) {
+    function setNomeHabito($nome) {
         $this->nomeHabito = $nome;
     }
 
-    function setCategoria($categoria) {
+    function setCategoriaHabito($categoria) {
         $this->categoriaHabito = $categoria;
     }
 
-    function setDificuldade($dificuldade) {
+    function setDificuldadeHabito($dificuldade) {
         $this->dificuldadeHabito = $dificuldade;
     }
 
-    function setContCiclo($contCiclo) {
+    function setContCicloHabito($contCiclo) {
         $this->contCicloHabito = $contCiclo;
     }
 
@@ -266,7 +240,12 @@ class DAOHabito {
         $this->diasBarra = $array;
     }
 
-    function mostrarHabito() {
-        return $this->codUsuario . "-" . $this->nomeUsuario . "-" . $this->emailUsuario . "-" . $this->senhaUsuario;
+    function mostrarHabitos() {
+        $array = $this->listaHabitos;
+        foreach($array as $indice => $sub){ 
+            foreach($sub as $indice => $valor){
+                 echo var_dump($indice,$valor)."<br>";
+            }
+        }
     }
 }
