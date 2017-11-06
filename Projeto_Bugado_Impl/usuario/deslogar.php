@@ -7,5 +7,6 @@
 	session_start();
     session_destroy();
     echo "<a>Carregando...</a>";
-    echo "<script language='javascript'>deslogar()</script>";
+    echo "<html><head><link rel='stylesheet' type='text/css' href='../design2.css'/>
+    </head><body><script language='javascript'>deslogar()</script></body></html>";
 ?>

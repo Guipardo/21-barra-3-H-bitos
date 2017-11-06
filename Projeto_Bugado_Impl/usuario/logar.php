@@ -10,6 +10,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="../design2.css"/>
         <script language="javascript">
             function sucesso() {
                 setTimeout("window.location='../canvas/painelCanvas.php'", 2000);

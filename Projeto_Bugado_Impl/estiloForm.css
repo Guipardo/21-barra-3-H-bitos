@@ -1,0 +1,29 @@
+body{
+    background: linear-gradient(white, rgba(118, 220, 250, 173)) fixed;
+}
+
+a{
+    font-family: "Trebuchet MS";
+    font-size: 16px;
+    font-weight: bold;
+    text-align: justify;
+    padding-right: 10px;
+}
+
+.titulo{
+    font-family: "Trebuchet MS";
+    font-size: 24px;
+    color: #CB0000;
+    font-weight: bold;
+    text-align: justify;
+}
+
+section{
+    position: absolute;
+    top:5%;
+    left:5%;
+}
+
+.caixaTexto{
+    width: 200px;
+}

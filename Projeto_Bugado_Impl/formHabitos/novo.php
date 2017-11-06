@@ -12,6 +12,7 @@
     <head>
         <meta charset="utf-8">
         <title>Novo Hábito</title>
+        <link rel="stylesheet" type="text/css" href="design2.css"/>
         <script language="javascript">
             function sucesso() {
                 setTimeout("window.location='../canvas/painelCanvas.php'", 3000);

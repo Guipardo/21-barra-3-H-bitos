@@ -10,6 +10,7 @@
     <head>
         <meta charset="utf-8">
         <title>Cadastro</title>
+        <link rel="stylesheet" type="text/css" href="../design2.css"/>
         <script language="javascript">
             function sucesso() {
                 setTimeout("window.location='../formLogin.php'", 3000);

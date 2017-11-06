@@ -12,6 +12,7 @@
     <head>
         <meta charset="utf-8">
         <title>Alterar dados</title>
+        <link rel="stylesheet" type="text/css" href="design2.css"/>
         <script language="javascript">
             function deletado() {
                 setTimeout("window.location='../home.php'", 2000);

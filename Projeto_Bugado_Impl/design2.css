@@ -1,12 +1,17 @@
+body{
+    background: linear-gradient(white, rgba(118, 220, 250, 173)) fixed;
+}
+
 #cadastro {
     font-family: "Trebuchet MS";
-    color: #000000;
+    color: #CB0000;
     font-size: 18px;
     list-style:#CB0000;
+    
 }
 #caixa{
-     border-radius: 10px 10px;
-    border-color: #000000;
+    border-radius: 10px 10px;
+    border-color: #CB0000;
     font-size: 18px;
     font-family: "Trebuchet MS";
     margin-left: 4%;
@@ -20,13 +25,13 @@ color: #CB0000;
 h1{
     font-family: "Trebuchet MS";
     font-size: 24px;
-    color: #000000;
+    color: #CB0000;
     text-indent: 50px;
     text-align: justify;
 }
 #form1{
  border-radius: 10px 10px;
-    border-color: #000000;
+    border-color: #CB0000;
     font-size: 18px;
     font-family: "Trebuchet MS";
     margin-left: 4%;
@@ -65,107 +70,6 @@ li#foto01{
     background-color: #ffffff;
 }
 
-li#foto01:hover{
-    background-position: 0px 0px;
-    background-size: 200px 200px;
-}
-
-li#foto02{
-    background:url('Imagens/japan14.jpg')no-repeat;
-    background-position: 50% 50%;
-    background-size: 400px 400px;
-    background-color: #ffffff;
-} 
-
-li#foto02:hover {
-    background-position: 0px 0px;
-    background-size: 200px 200px;
-}
-
-li#foto03{
-    background:url('Imagens/japan17.jpg')no-repeat;
-    background-position: 50% 50%;
-    background-size: 400px 400px;
-    background-color: #ffffff;
-}
-
-li#foto03:hover{
-    background-position: 0px 0px;
-    background-size: 200px 200px;
-}
-
-li#foto04{
-    background:url('Imagens/japan18.jpg')no-repeat;
-    background-position: 50% 50%;
-    background-size: 400px 400px;   
-    background-color: #ffffff;
-}
-
-li#foto04:hover{
-    background-position: 0px 0px;
-    background-size: 200px 200px;
-}
-
-li#foto05{
-    background:url('Imagens/japan19.jpg')no-repeat;
-    background-position: 50% 50%;
-    background-size: 400px 400px;
-    background-color: #ffffff;
-}
-
-li#foto05:hover{
-    background-position: 0px 0px;
-    background-size: 200px 200px;
-}
-
-li#foto06{
-    background:url('Imagens/japan20.jpg')no-repeat;
-    background-position: 50% 50%;
-    background-size: 400px 400px;
-    background-color: #ffffff;
-}
-
-li#foto06:hover{
-    background-position: 0px 0px;
-    background-size: 200px 200px;
-}
-
-li#foto07{
-    background:url('Imagens/japan23.jpg')no-repeat;
-    background-position: 50% 50%;
-    background-size: 400px 400px;
-    background-color: #ffffff;
-}
-
-li#foto07:hover{
-    background-position: 0px 0px;
-    background-size: 200px 200px;
-}
-
-li#foto08{
-    background:url('Imagens/japan24.jpg')no-repeat;
-    background-position: 50% 50%;
-    background-size: 400px 400px;
-    background-color: #ffffff;
-}
-
-li#foto08:hover{
-    background-position: 0px 0px;
-    background-size: 200px 200px;
-}
-
-li#foto09{
-    background:url('Imagens/japan28.jpg')no-repeat;
-    background-position: 50% 50%;
-    background-size: 400px 400px;
-    background-color: #ffffff;
-}
-
-li#foto09:hover{
-    background-position: 0px 0px;
-    background-size: 200px 200px;
-}
-
 p{
     font-family: "Arial";
     font-size: 16px;
@@ -175,12 +79,6 @@ p{
 }
 
 #bodyEntrar{
-    background-color: #FFD6C5;   
-    margin-top: 10%;
-}
-
-#bodyCadastro{
-    background-color: #FFD6C5;   
     margin-top: 10%;
 }
 
@@ -553,28 +451,6 @@ p{
     margin-top: 2%;
     margin-right: 4%;
     margin-bottom: 2%;
-}
-
-ul#album-fotos {
-    width: 700px;   
-    margin: 0 auto;
-    padding: 0 auto;
-    overflow: hidden;
-    list-style: none;
-}
-
-ul#album-fotos li {
-    float: left;
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    border: 5px solid #ffffff;
-    background-color: #ffffff;
-    box-shadow: 1px 1px 3px rgba(0,0,0,.4);
-    -webkit-transition: all .4s ease-in;
-    -moz-transition: all .4s ease-in;
-    -o-transition: all .4s ease-in;
-    -ms-transition: all .4s ease-in;
 }
 
 ul#album-fotos li:hover {
