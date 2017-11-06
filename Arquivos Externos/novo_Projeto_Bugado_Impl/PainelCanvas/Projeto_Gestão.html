@@ -1,0 +1,370 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Projetão!</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        
+        <canvas id="LookAtMyCrazyDrawing"></canvas>
+        <script>
+            window.onload = function(){
+                var canvas = document.getElementById("LookAtMyCrazyDrawing");
+                var context = canvas.getContext("2d");
+                canvas.width = (window.innerWidth-10);
+                canvas.height = (window.innerHeight-20);
+                
+                context.beginPath();
+                context.moveTo(25,5);
+                context.quadraticCurveTo(5,5, 5, 35); //borda superior esquerda da barra superior
+                context.lineWidth = 2;
+                context.stroke();
+                context.closePath();
+                
+                context.beginPath(); //lina horizontal superior da barra superior
+                context.moveTo(25,05);
+                context.lineTo(1330,05);
+        
+                context.moveTo(05,35); // linha vertical esquerda da barra superior
+                context.lineTo(05,152);
+                //context.strokeStyle='rgb(10,0,0)';
+                context.stroke();
+                
+                context.moveTo(1350, 35); // linha vertical direita da barra superior
+                context.lineTo(1350, 152);
+                context.stroke();
+                
+                context.moveTo(25, 182);
+                context.lineTo(1330, 182);//linha horizontal inferior da barra superior
+                context.stroke();
+                context.closePath();
+                
+                context.beginPath();
+                context.moveTo(1330, 05);
+                context.quadraticCurveTo(1350, 05, 1350, 35);// borda superior direita da barra superior
+                context.stroke();
+                context.closePath();
+                
+                
+                
+                context.beginPath();
+                context.moveTo(25, 182);
+                context.quadraticCurveTo(05, 182, 05, 152); //borda inferior esquerda da barra superior
+                context.stroke();
+                context.closePath();
+                
+                context.beginPath();
+                context.moveTo(1330, 182);
+                context.quadraticCurveTo(1350, 182, 1350, 152);// borda inferior direita da barra superior
+                context.stroke();
+                context.closePath();
+                
+                context.beginPath();
+                context.font = "bold 47px Algerian"; 
+                context.fillStyle = "black";
+                context.fillText('23 Barra 3 Criador de Hábitos', 20, 70);// faz texto da barra superior
+                context.fill();
+                context.closePath();
+                
+                context.beginPath();
+                context.moveTo(1008, 05);
+                context.lineTo(1008, 182);
+                context.stroke();
+                context.closePath();
+                
+                context.beginPath();
+                context.font = "800 47px Arial"; 
+                context.fillStyle = "black";
+                context.fillText('+', 20, 140);// faz sinal de + dentro da barra superior
+                context.fill();
+                context.closePath();
+                
+                context.beginPath();
+                context.font = " 20px Arial";
+                context.fillStyle = "black";
+                context.fillText("Novo", 55, 130); // escreve "novo" ao lado do sinal de "+"
+                context.fill();
+                context.closePath();
+                
+                var img=document.createElement('img'); // icone de lapis
+                img.src='lapis_Projetão.jpg';
+                img.onload = function(){
+                    context.mozImageSmoothingEnabled = false;
+                    context.drawImage(img,130,109,35,25);
+                }
+                
+                context.beginPath();
+                context.font = " 20px Arial";
+                context.fillStyle = "black";
+                context.fillText("Editar", 165, 130); // escreve "Editar" ao lado do icone de lapis 
+                context.fill();
+                context.closePath();
+                
+                var img2=document.createElement('img'); // icone de remover
+                img2.src='lixeira_Projetão.jpg';
+                img2.onload = function(){
+                    context.mozImageSmoothingEnabled = false;
+                    context.drawImage(img2,250,111,35,25);
+                }
+                
+                function write(pxAndFont, color, string, x, y){ //função de escrita
+                    context.beginPath();
+                    context.font = pxAndFont;
+                    context.fillStyle = color;
+                    context.fillText(string, x, y); 
+                    context.fill();
+                    context.closePath();
+                }
+                
+                write("20px Arial", "black", "Remover", 285, 130); //escreve "Remover" na barra superior
+                
+                var img3=document.createElement('img'); // icone de relogio
+                img3.src='relogio_Projetão.jpg';
+                img3.onload = function(){
+                    context.mozImageSmoothingEnabled = false;
+                    context.drawImage(img3,400,109,28,25);
+                }
+                
+                write("20px Arial", "black", "Definir horário limite", 430, 130);
+                
+                var img4=document.createElement('img'); // icone de sol
+                img4.src='sol_Projetão.png';
+                img4.onload = function(){
+                    context.mozImageSmoothingEnabled = false;
+                    context.drawImage(img4,805,80,56,50);
+                }
+                
+                var img5=document.createElement('img'); // icone de lua
+                img5.src='lua_Projetão.png';
+                img5.onload = function(){
+                    context.mozImageSmoothingEnabled = false;
+                    context.drawImage(img5,910,80,50,50);
+                }
+                
+                write("20px Arial", "black", "Bem vindo(a)", 1020, 50);
+                
+                var img6=document.createElement('img'); // icone de foto
+                img6.src='lucie_Projetão.jpg';
+                img6.onload = function(){
+                    context.mozImageSmoothingEnabled = false;
+                    context.drawImage(img6,1230,25,100,133);
+                }
+                
+                var userName = "LULU"; // variavel que contem o nome do usuario
+                write("italic 20px Arial", "black", userName, 1020, 100); // escreve o nome do usuario na barra superior
+                
+                context.beginPath();
+                context.font = "italic 20px Arial";
+                context.strokeStyle = "blak";
+                context.strokeText(userName, 1020, 100); //reforça o negrito do nome do usuario
+                context.stroke();
+                context.closePath();
+                
+                var img7=document.createElement('img'); // icone de foto
+                img7.src='seta_Projetão.jpg';
+                img7.onload = function(){
+                    context.mozImageSmoothingEnabled = false;
+                    context.drawImage(img7,1170,78,30,30);
+                }
+                
+                
+                
+                
+                function habito(pxFont, color, strg, xFont, yFont, ciclo, cpX1, cpY1,largura, altura){
+                    
+                    this.pxFont = pxFont;
+                    this.color = color;
+                    this.strg = strg;
+                    this.xFont = xFont;
+                    this.yFont = yFont;
+                    
+                    this.cpX1 = cpX1;
+                    this.cpY1 = cpY1;
+                    
+                    this.largura = largura;
+                    this.altura = altura;
+                    
+                    var xH1 = cpX1+20;
+                    var yH1 = cpY1;
+                    var xV1 = cpX1;
+                    var yV1 = cpY1 + 30;
+                    
+                     
+                    var cpX2 = cpX1;
+                    var cpY2 = cpY1 + altura;
+                        
+                    var xH2 = cpX2+20;
+                    var yH2 = cpY2;
+                    var xV2 = cpX2;
+                    var yV2 = cpY2 - 30;
+                    
+                     
+                    var cpX3 = cpX1 + largura;
+                    var cpY3 = cpY1;
+                        
+                    var xH3 = cpX3 - 20;
+                    var yH3 = cpY3;
+                    var xV3 = cpX3;
+                    var yV3 = cpY3 + 30;
+                    
+                    
+                                         
+                    var cpX4 = cpX1 + largura;
+                    var cpY4 = cpY1 + altura;
+                        
+                    var xH4 = cpX4 - 20;
+                    var yH4 = cpY4;
+                    var xV4 = cpX4;
+                    var yV4 = cpY4 - 30;
+                    
+                    
+                    var listaHabitos = new Array();
+                    
+                    for(i=0; i<21; i++){
+                        listaHabitos.push("white");
+                    }
+                    
+                    
+                    
+                    this.mostraCiclo = function(){
+                        write(pxFont, color, ("Ciclo "+ciclo), xFont+800, yFont);
+                        
+                        var img8=document.createElement('img'); // icone de foto
+                        img8.src='seta_Circular_Projetão.jpg';
+                        img8.onload = function(){
+                        context.mozImageSmoothingEnabled = false;
+                        context.drawImage(img8,930,230,30,30);
+                        }
+                    }
+                    
+                    this.retanguloHabito = function(){
+                        context.beginPath();
+                        context.clearRect(xFont, yFont-50, 168, 50);
+                        context.closePath();
+                        write(pxFont, color, strg, xFont, yFont);
+                        
+                        context.beginPath();
+                        context.moveTo(xH1,yH1);
+                        context.quadraticCurveTo(cpX1,cpY1, xV1, yV1); //lapis faz borda superior esquerda
+                        
+                        context.lineWidth = 4; // grossura da linha
+                        context.strokeStyle = 'rgb(159, 180, 111)'; // cor da linha
+                        context.fillStyle = 'rgb(159, 180, 111)';   // cor do interior
+                       
+                        context.lineTo(xV2, yV2); // lapis desenha linha da lateral direita
+                        
+                        context.quadraticCurveTo(cpX2,cpY2, xH2,yH2); //lapis desenha borda inferior esquerda
+                        
+                        context.lineTo(xH4, yH4); // lapis desenha linha inferior
+                        
+                        context.quadraticCurveTo(cpX4,cpY4, xV4, yV4); //lapis desenha borda inferior direita
+                        
+                        context.lineTo(xV3, yV3); // lapis desenhs linha lateral direita
+                      
+                        context.quadraticCurveTo(cpX3,cpY3, xH3, yH3); // lapis desenha borda superior direita
+                      
+                        
+                        context.lineTo(xH1, yH1); //lapis termina desenhando linha superior
+                        
+                        context.fill();
+                        context.stroke();
+                        context.closePath();
+                    }
+                    
+                    
+                    this.graficoHabito = function(){
+                        context.beginPath();
+                        context.clearRect(xFont, yFont-50, 168, 50);
+                        context.closePath();
+                        
+                        context.beginPath();
+                        context.moveTo(xH1,yH1);
+                        context.quadraticCurveTo(cpX1,cpY1, xV1, yV1); //lapis faz borda superior esquerda
+                        
+                        context.lineWidth = 4; // grossura da linha
+                        context.strokeStyle = 'rgb(159, 180, 111)'; // cor da linha
+                        context.fillStyle = 'rgb(255, 255, 255)';   // cor do interior
+                       
+                        context.lineTo(xV2, yV2); // lapis desenha linha da lateral direita
+                        
+                        context.quadraticCurveTo(cpX2,cpY2, xH2,yH2); //lapis desenha borda inferior esquerda
+                        
+                        context.lineTo(xH4, yH4); // lapis desenha linha inferior
+                        
+                        context.quadraticCurveTo(cpX4,cpY4, xV4, yV4); //lapis desenha borda inferior direita
+                        
+                        context.lineTo(xV3, yV3); // lapis desenhs linha lateral direita
+                      
+                        context.quadraticCurveTo(cpX3,cpY3, xH3, yH3); // lapis desenha borda superior direita
+                      
+                        
+                        context.lineTo(xH1, yH1); //lapis termina desenhando linha superior
+                        
+                        context.fill();
+                        context.stroke();
+                        context.closePath();
+                        
+                        
+                        
+                        context.beginPath();
+                        var xQuadrado = xH1+33;
+                        var yQuadrado = yV1+22;
+                        for(i=0; i<21; i++){
+                            context.fillStyle = listaHabitos[i];
+                            context.fillRect(xQuadrado, yQuadrado,40,40);
+                            context.fill();
+                            xQuadrado+=40;
+                        }
+                        context.closePath();
+                        
+                        
+            
+                        context.beginPath();
+                        context.lineWidth = 2;
+                        context.strokeStyle = "black";
+                        var xQuadrado = xH1;
+                        var yQuadrado = yV1+22;
+                        var numPos = xH1+5;
+                        var num = 1
+                        for(i=0; i<21; i++){
+                            context.strokeRect(xQuadrado, yQuadrado,43,40);
+                            context.stroke();
+                            xQuadrado+=43;
+                            if(i<9){
+                                write("bolder 20px Arial", color,("0"+num), numPos, yV2);
+                            }
+                            else{
+                                write("bolder 20px Arial", color, num, numPos, yV2);
+                            }
+                            num++
+                            numPos+=43;
+                        }
+                        context.closePath();
+                        
+                        write("bolder 20px Arial", color, "Ler mais livros       Dia Atual: 14       Lembrete: 14:00       Categoria: Leitura       Dificuldade: Fácil", xH1-5, yV1);//7espaços entre os blocos de informaçao na string.
+                    
+                    }
+                }
+                
+                var ler = new habito("25px Arial", "black", "Ler mais livros", 30, 250, 1, 30, 280, 950, 150);
+                ler.retanguloHabito();
+                ler.mostraCiclo();
+                          
+                function posMouse(x1, y1, x2, y2){
+                    var mouseX = event.pageX;
+                    var mouseY = event.pageY;
+                    
+                    if (((mouseX+10)>=x1) && ((mouseX-10)<=x2) &&  ((mouseY+10)>=y1) && ((mouseY-10)<=y2)){
+                        
+                        ler.graficoHabito();
+                    }
+                    else{
+                        ler.retanguloHabito();
+                    }
+                }
+                // Tambem funciona canvas.addEventListener("mousemove", function(){posMouse(30, 280, 900, 430)});
+                canvas.onmousemove = function(){posMouse(30, 280, 900, 430)}
+            }
+        </script>
+    </body>
+</html>

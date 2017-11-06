@@ -1,0 +1,480 @@
+#cadastro {
+    font-family: "Trebuchet MS";
+    color: #CB0000;
+    font-size: 18px;
+    list-style:#CB0000;
+    
+}
+#caixa{
+     border-radius: 10px 10px;
+    border-color: #CB0000;
+    font-size: 18px;
+    font-family: "Trebuchet MS";
+    margin-left: 4%;
+    margin-right: 4%;
+
+}
+#caixa2{
+color: #CB0000;
+}
+
+h1{
+    font-family: "Trebuchet MS";
+    font-size: 24px;
+    color: #CB0000;
+    text-indent: 50px;
+    text-align: justify;
+}
+#form1{
+ border-radius: 10px 10px;
+    border-color: #CB0000;
+    font-size: 18px;
+    font-family: "Trebuchet MS";
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+
+h2{
+    font-family: "Trebuchet MS";
+    font-size: 20px;
+    color: black;
+    text-indent: 50px;
+    text-align: justify;
+}
+
+h4{
+    font-family: "Trebuchet MS";
+    font-size: 20px;
+    color: black;
+    text-indent: 50px;
+    text-align: justify;
+}
+
+h5{
+    font-family: "Trebuchet MS";
+    font-size: 14px;
+    color: black;
+    text-indent: 50px;
+    text-align: justify;
+}
+
+li#foto01{
+    background:url('Imagens/japan13.jpg')no-repeat;
+    background-position: 50% 50%;
+    background-size: 400px 400px;
+    background-color: #ffffff;
+}
+
+
+
+p{
+    font-family: "Arial";
+    font-size: 16px;
+    text-indent: 30px;
+    text-align: justify;
+    line-height: 220%;    
+}
+
+#bodyEntrar{
+    background-color: #FFD6C5;   
+    margin-top: 10%;
+    background-color: linear-gradient(white, rgba(118, 220, 250, 173), fixed);
+
+}
+
+#botao{
+    font-family: "Trebuchet MS";
+    font-size: 14px;
+    background-color: #CB0000;
+    color: white;
+    border: 1px solid #CB0000;
+    border-radius: 5px 5px;
+}
+
+#botao:hover{
+    background-color: white;
+    color: #CB0000;
+    cursor: pointer;
+}
+
+#campo2{
+    border-radius: 10px 10px;
+    border-color: #CB0000;
+    font-size: 18px;
+    font-family: "Trebuchet MS";
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+#campoEntrar{
+    border-radius: 10px 10px;
+    border-color: #CB0000;
+    font-size: 18px;
+    font-family: "Trebuchet MS";
+    color: #CB0000;
+    margin-left: 12%;
+    margin-right: 12%;   
+    background-color: white;
+}
+
+#headEntrar{
+    background-color: white;   
+    margin-left: 4%;
+    margin-right: 4%;
+    border-radius: 10px;
+}
+
+#img{
+    margin-top: -2.7%;
+    width: 100%;
+    height: 850px;
+}
+
+#imgCentral{
+    width: 300px;
+    height: 200px;
+    border-radius: 10px 10px;
+    border-color: black;
+    margin-top: 0.5%;
+    margin-left: 6%; 
+    margin-bottom: 0.5%;
+}
+
+#imgCentral2{
+    width: 300px;
+    height: 200px;
+    border-radius: 10px 10px;
+    border-color: black;
+    margin-top: 4%;
+    margin-left: 6%; 
+    margin-bottom: 0.5%;
+}
+
+#imgLateral{
+    float: right;
+    width: 240px;
+    height: 240px;
+    border-radius: 10px 10px;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+#imgLateral2{
+    float: right;
+    width: 240px;
+    height: 240px;
+    border-radius: 10px 10px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    border-color: black;
+}
+
+#imgLateral3{
+    float: right;
+    width: 500px;
+    height: 333px;
+    border-radius: 10px 10px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    border-color: black;
+}
+
+#imgLeft{
+    width: 300px;
+    height: 200px;
+    border-radius: 10px 10px;
+    border-color: black;
+    margin-top: 0.5%;
+    margin-left: 6%;
+    margin-bottom: 0.5%;
+}
+
+#imgLeft2{
+    width: 300px;
+    height: 200px;
+    border-radius: 10px 10px;
+    border-color: black;
+    margin-top: 4%;
+    margin-left: 6%;
+    margin-bottom: 0.5%;
+}
+
+#imgRight{
+    width: 300px;
+    height: 200px;
+    border-radius: 10px 10px;
+    border-color: black;
+    margin-top: 0.5%;
+    margin-left: 6%; 
+    margin-bottom: 0.5%;
+}
+
+#imgRight2{
+    width: 300px;
+    height: 200px;
+    border-radius: 10px 10px;
+    border-color: black;
+    margin-top: 4%;
+    margin-left: 6%; 
+    margin-bottom: 0.5%;
+}
+
+#imgSecundaria{
+    margin-top: -2.7%;
+    width: 100%;
+    height: 380px;
+}
+
+#legend{
+    font-size: 17px;
+    font-family: "Trebuchet MS";
+    color: #CB0000;
+}
+
+#linhaFoot{
+    margin-left: 8%;
+}
+
+#link{
+    font-family: "Trebuchet MS";
+    font-size: 20px;
+    color: #CB0000;
+    text-indent: 50px;
+    text-align: justify;
+    text-decoration: none;   
+}
+
+#link:hover{
+    font-family: "Trebuchet MS";
+    font-size: 20px;
+    color: black;
+    text-indent: 50px;
+    text-align: justify;
+    text-decoration: none;   
+}
+
+#logo{
+    margin-left: 2%;
+    margin-bottom: -4.5%;
+    border-radius: 10px 10px;
+    width: 250px;
+    height: 70px;
+}
+
+#logoEntrar{
+    margin-left: 40%;
+    margin-right: 50%;
+    width: 250px;
+    height: 70px;
+}
+
+#menuLateral{
+    float: right;
+    margin-top: 4%;
+    margin-right: 4%;
+    width: 25%;
+    height: 500px;
+    border-radius: 10px 10px;
+}
+
+#menuLateral2{
+    float: right;
+    margin-top: 2%;
+    margin-right: 8%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    width: 240px;
+    height: 240px;
+    border-radius: 10px 10px;    
+}
+
+#menuPrincipal ul{
+    list-style-type: none;
+    text-align: center;
+    background-color: black;
+    border-radius: 5px 30px;
+    padding: 10px;
+    margin-top: -2%;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+#menuPrincipal ul li{
+    display: inline;   
+}
+
+#menuPrincipal ul li a{
+    padding: 20px;   
+    font-size: 16px;
+    font-family: "Lucida Sans Unicode";
+    color: white;
+    text-decoration: none;
+    border-radius: 5px 30px;
+}
+
+#menuPrincipal ul li a:hover{
+    color: #CB0000;
+    background-color: white;
+    border-radius: 5px 30px;   
+}
+
+
+#menuSuperior ul{
+    list-style-type: none;
+    text-align: center;
+    background-color: black;
+    border-radius: 30px 5px;
+    padding: 10px;
+    margin-left: 50%;
+    margin-right: 4%;
+    word-spacing: 6px;
+}
+
+#menuSuperior ul li{
+    display: inline;   
+}
+
+#menuSuperior ul li a{
+    padding: 10px;
+    font-size: 16px;
+    font-family: "Lucida Sans Unicode";
+    color: white;
+    text-decoration: none;
+    margin-right: 4%;
+}
+
+#menuSuperior ul li a:hover{
+    color: #CB0000;
+    background-color: white;
+    border-radius: 30px 5px;
+}
+
+#pFoot{
+    text-align: center;
+    font-family: "Lucida Sans Unicode";
+    font-size: 12px;
+}
+
+#pArticle{
+    font-family: "Arial";
+    font-size: 16px;
+    text-indent: 30px;
+    text-align: justify;
+    line-height: 220%;
+    margin-left: 4%;
+    margin-right: 35%;
+}
+
+#pArticle2{
+    font-family: "Trebuchet MS";
+    font-size: 18px;
+    color: #9C0000;
+    text-indent: 4%;
+    text-align: justify;
+    line-height: 220%;
+}
+
+#pArticle3{
+    font-family: "Trebuchet MS";
+    font-size: 16px;
+    color: black;
+    text-indent: 6%;
+    text-align: justify;
+    margin-left: 4%;
+    margin-right: 4%;
+    line-height: 220%;
+}
+
+#pArticle4{
+    font-family: "Trebuchet MS";
+    font-size: 16px;
+    text-indent: 30px;
+    text-align: justify;
+    line-height: 220%;
+    margin-left: 4%;
+    margin-right: 30%;
+}
+
+#pArticle5{
+    font-family: "Trebuchet MS";
+    font-size: 16px;
+    text-indent: 30px;
+    text-align: justify;
+    line-height: 220%;
+    margin-left: 4%;
+    margin-right: 48%;
+}
+
+#pAutor{
+    font-family: "Arial";
+    font-size: 18px;
+    color: #CB0000; 
+    text-indent: 10px;
+    text-align: justify;
+    line-height: 220%;
+    margin-left: 3%;
+    margin-right: 4%;   
+}
+
+#pessoa{
+    font-family: "Arial";
+    font-size: 22px;
+    color: black;
+    text-decoration: none;
+    margin-left: 37%;
+}
+
+#pessoa:hover{
+    color: #CB0000;
+}
+
+#tabelaForm{
+    margin-left: 35%;
+}
+
+#tituloEntrar{
+    font-family: "Trebuchet MS";
+    font-size: 18px;
+    color: #CB0000;
+    text-indent: 40px;
+    text-align: justify;   
+}
+
+#topo{
+    width: 50px;
+    height: 50px;
+    float: right;
+    margin-top: 2%;
+    margin-right: 4%;
+    margin-bottom: 2%;
+}
+
+
+
+
+
+ul#album-fotos li:hover {
+    -webkit-transform: scale (1.5);
+    -moz-transform: scale (1.5);
+    -o-transform: scale (1.5);
+    -ms-transform: scale (1.5);
+}
+
+ul#album-fotos li span {
+    opacity: 0;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #000000;
+    background-color: rgba(0,0,0,.2);
+    font-size: 11pt;
+    line-height: 370px;
+    padding: 5px;
+}
+
+ul#album-fotos li:hover{
+    opacity: 1px;
+} 
