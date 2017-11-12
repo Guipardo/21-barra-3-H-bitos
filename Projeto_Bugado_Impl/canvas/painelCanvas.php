@@ -11,28 +11,15 @@
             /* LISTA DE VARIAVEIS */
             $login = $_SESSION["login"];
             $dao = carregarDAO($login); //Carrega todos os hábitos cadastrados
-            $habito = lerHabitoPeloIndice($dao,0); /*
+            $quantHabitos = count($dao->getListaHabitos());
+            /*
                 Seleciona um dos hábitos pelo indice, que é passado por parametro
                 Por padrão é o índice 0 que se refere ao primeiro hábito
             */
-        
-            /* Atributos do Hábito */
-            $nomeHabito = getAtributoHabito($habito,"nome");
-            $categoriaHabito = getAtributoHabito($habito,"categoria");
-            $dificuldadeHabito = getAtributoHabito($habito,"dificuldade");
-            $ciclo = getAtributoHabito($habito,"ciclo");
-            $lembrete = getAtributoHabito($habito,"lembrete");
-            $dias = getAtributoHabito($habito,"dias").
-        
             /* Atributos do usuário */
             $nomeUsuario = getNomeUsuario($login); //Pega o nome do usuário pelo Login da sessão
-            $listaDias = getTodosDias($habito); // Pega o array de dias do hábito
-            
-            
-            /*
-            686 à 691 -> botoes html que devem usar php
-            
-            527/530 -> começa codigo para ler array php contendo objetos com os parametros de cada habito;
+               
+            /*527/530 -> começa codigo para ler array php contendo objetos com os parametros de cada habito;
             
             a partir da linha 532 -> variavel de pontuaçao. 
             */
@@ -644,17 +631,26 @@
 
 
                 }
-
-                var ler = new habito("Ler mais livros", 14, 00, 00, "leitura", "facil", 1);
-                //ler.retanguloHabito();
-                //ler.mostraCiclo();
-                //ler.graficoHabito();
-
-                var teste = new habito("Busty Buffy", 14, 01, 50, "leitura", "facil", 2); // problema de espaçamento
-
+                
                 var listaHabitos = new Array();
-                listaHabitos.push(teste);
-                listaHabitos.push(ler);
+                var contHabitos = parseInt("<?php echo $quantHabitos ?>");
+                var nomeHabito = "";
+                var categoriaHabito = "";
+                var dificuldadeHabito = "";
+                var ciclo = "";
+                var dias = [];
+                
+                <?php global $indice; $indice = 0; ?>
+                for (i = 0; i <= contHabitos; i++) { 
+                    <?php $habito = lerHabitoPeloIndice($dao,$indice); ?>
+                    nomehabito = "<?php echo getAtributoHabito($habito,'nome'); ?>";
+                    categoriaHabito = "<?php echo getAtributoHabito($habito,'categoria'); ?>";
+                    dificuldadeHabito = "<?php echo getAtributoHabito($habito,'dificuldade'); ?>";
+                    ciclo = "<?php echo getAtributoHabito($habito,'ciclo'); ?>";
+                    <?php $indice = $indice + 1; ?>
+                    var habitoPronto = new habito(nomeHabito,14,00,00,categoriaHabito,dificuldadeHabito,ciclo);
+                    listaHabitos.push(habitoPronto);
+                }
 
                 //teste.lembreteActive();
                 //ler.lembreteActive();
@@ -673,8 +669,6 @@
                         listaHabitos[numHabito].graficoHabito();
                         lembreteActive();
                     }
-
-
 
                 }
 

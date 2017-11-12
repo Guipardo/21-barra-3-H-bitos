@@ -13,24 +13,28 @@ include '../acesso/DAOUsuario.php';
         return $dao;
     }
 
-    function getAtributoHabito($dao,$atributo){
+    function getAtributoHabito($habito,$atributo){
         switch($atributo){
             case "nome":
-                return $dao->getNomeHabito();
+                return $habito->getNomeHabito();
                 break;
             case "categoria":
-                return $dao->getCategoriaHabito();
+                return $habito->getCategoriaHabito();
                 break;
             case "dificuldade":
-                return $dao->getDificuldadeHabito();
+                return $habito->getDificuldadeHabito();
                 break;
             case "ciclo":
-                return $dao->getContCicloHabito();
+                return $habito->getContCicloHabito();
                 break;
             case "lembrete":
-                return $dao->getLembrete();
+                return $habito->getLembrete();
                 break;
         }
+    }
+
+    function getDia($habito,$dia){
+        return $habito->getDia($dia);
     }
 
     function atualizarLembrete($data,$habito){
