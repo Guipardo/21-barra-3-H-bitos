@@ -1,6 +1,4 @@
-# Projeto_Bugado
-
-21 Barra 3 - Hábitos 
+# 21 Barra 3 - Hábitos 
 
 Gerente de projeto: Guilherme.
 Membros do projeto: Guilherme, José, Marina, Gabriel.
